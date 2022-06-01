@@ -51,37 +51,28 @@ AVL* AVL::Insert(AVL* root, int x) {
         }
     }
 
-    std::cout << x << " " << root->get_height() << " " << balance << "\n";
-
-
     // Left Left
     if (balance > 1 && x < root->left->data) {
-        std::cout << "ayy lmao ceva rotire a inceput1\n";
         return rightRotate(root);
     }
         
 
     // Right Right
     if (balance < -1 && x > root->right->data) {
-        std::cout << "ayy lmao ceva rotire a inceput2\n";
         return leftRotate(root);
     }
         
 
     // Left Right
     if (balance > 1 && x > root->left->data) {
-        std::cout << "ayy lmao ceva rotire a inceput3\n";
         root->left = leftRotate(root->left);
         return rightRotate(root);
-        std::cout << "ayy lmao ceva rotire a mers3\n";
     }
 
     // Right Left
     if (balance < -1 && x < root->right->data) {
-        std::cout << "ayy lmao ceva rotire a inceput4\n";
         root->right = rightRotate(root->right);
         return leftRotate(root);
-        std::cout << "ayy lmao ceva rotire a mers4\n";
     }
 
     return root;
@@ -141,38 +132,42 @@ AVL* AVL::DeleteNode(AVL* root, int key) {
     if (root == NULL)
         return root;
 
-    root->height = 1 + std::max(root->left->height, root->right->height);
-
-    int balance = root == nullptr ? 1 : (root->left->height - root->right->height) + 1;
+    root->height = 1 + std::max(root->left->get_height(), root->right->get_height());
+    int balance = 0;
+    if (root != nullptr) {
+        if (root->left != nullptr && root->right != nullptr) {
+            balance = (root->left->height - root->right->height);
+        }
+        if (root->left == nullptr && root->right != nullptr) {
+            balance = (1 - root->right->height);
+        }
+        if (root->left != nullptr && root->right == nullptr) {
+            balance = (root->left->height - 0);
+        }
+    }
 
     // Left Left
     if (balance > 1 && key < root->left->data) {
-        std::cout << "ayy lmao ceva rotire a inceput1\n";
         return rightRotate(root);
     }
 
 
     // Right Right
     if (balance < -1 && key > root->right->data) {
-        std::cout << "ayy lmao ceva rotire a inceput2\n";
         return leftRotate(root);
     }
 
 
     // Left Right
     if (balance > 1 && key > root->left->data) {
-        std::cout << "ayy lmao ceva rotire a inceput3\n";
         root->left = leftRotate(root->left);
         return rightRotate(root);
-        std::cout << "ayy lmao ceva rotire a mers3\n";
     }
 
     // Right Left
     if (balance < -1 && key < root->right->data) {
-        std::cout << "ayy lmao ceva rotire a inceput4\n";
         root->right = rightRotate(root->right);
         return leftRotate(root);
-        std::cout << "ayy lmao ceva rotire a mers4\n";
     }
 
     return root;

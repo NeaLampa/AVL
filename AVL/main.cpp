@@ -12,10 +12,6 @@ int main() {
     b.Insert(root, 40);
     b.Insert(root, 15);
     b.Insert(root, 10);
-
-    b.Inorder(root);
-    std::cout << "\n";
-
     b.Insert(root, 60);
     b.Insert(root, 80);
 
@@ -23,7 +19,7 @@ int main() {
     std::cout << "\n";
     
 
-    /*if (b.Search(root, 100))
+    if (b.Search(root, 100))
         std::cout << "exista\n";
     else
         std::cout << "nu exista\n";
@@ -31,5 +27,5 @@ int main() {
     b.DeleteNode(root, 80);
 
     b.Inorder(root);
-    std::cout << "\n";*/
+    std::cout << "\n";
 }
